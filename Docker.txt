@@ -1,0 +1,56 @@
+sudo systemctl status docker : will give u the status of the docker.
+			       you can check the Active : thing to see whether it is active or inactive
+
+sudo systemctl enable --now docker : start and enable the docker.
+
+				if it doesnt start, then reboot your OS.
+
+sudo docker run hello-world : 
+
+sudo docker images : will list you the number of images we have here.
+
+sudo docker version. : docker client and docker server. docker is running in a virutal machine,which is linux.
+
+sudo docker run hello-world : will pull this image from internet.
+
+
+why should we use docker?
+1) get required software
+2) cannot install on this machine/requires python 3.8
+3) troubleshoot. re run installer. then, we get another error. again we go to 2), and we find out that we need another framework again. this keeps going on.
+
+docker says that, contarize it.
+there will be a container which will have its own resources and software.that will run the software. dockerize/containerize.
+guaranteed to run. isolated environment having its own resources/software.
+
+
+docker client is the command line(CLI). it will ask the docker output for the commands etc.
+docker server can communicate directly with the client. docker daemon is a service that runs on your host operating ssystem. it is responsible for running containers.
+
+Image : image is like a seed and a file. it has all the information and data inside to make a tree. no resources has been assigned till now.
+container : is like a full grown tree. it is what is produced from the image.
+
+some part of the hard disk for the container. all this details will be inside the image. 
+docker run hello-world : this command will be given to client. the client will then ask the same from the server.
+if image not in the cache, then will download it from the internet.
+
+DOCKER HUB is the place from where we download the images. infact we can also upload our images there.
+
+if first time download, then keep the images inside the cache, since we might ask for it again.
+
+What is container ? 
+we have apps like chrome,notepad etc.
+
+
+
+sudo docker ps : will show the list of all the images running
+
+
+
+
+
+
+
+
+
+	
