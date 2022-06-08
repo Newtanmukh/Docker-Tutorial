@@ -30,20 +30,73 @@ docker server can communicate directly with the client. docker daemon is a servi
 Image : image is like a seed and a file. it has all the information and data inside to make a tree. no resources has been assigned till now.
 container : is like a full grown tree. it is what is produced from the image.
 
-some part of the hard disk for the container. all this details will be inside the image. 
-docker run hello-world : this command will be given to client. the client will then ask the same from the server.
-if image not in the cache, then will download it from the internet.
-
-DOCKER HUB is the place from where we download the images. infact we can also upload our images there.
-
-if first time download, then keep the images inside the cache, since we might ask for it again.
-
-What is container ? 
-we have apps like chrome,notepad etc.
 
 
 
-sudo docker ps : will show the list of all the images running
+containers are a way to package application with all the necessary dependencies and configuration.
+it is a portable artifact,can be easily shared and moved around.
+makes development easy.
+
+container live in container repository.
+
+public repo for docker containers. docker hub for the docker images.
+
+depeing on OS, it might look different.
+
+with container, you wont have to install any of the dependencies on your OS, cause container itself act like a layer of its own operating system.
+
+setting up local dev env becomes easy/
+
+we can have different versions running simultaneously with out any conflict.
+
+container made up of layers of image. linux base image, small in size.
+top of base,u will have application image.
+
+
+docker run postgres:9.6
+docker ps = show running containers
+different version might have some layer common.
+
+
+
+
+	DOCKER vs VIRTUAL MACHINE :
+	
+     OS has two layers, OS layer and applications layer.
+     docker virtualizes application layer only 
+     virtual machine virtualizes both application as well as OS layer. VM virtualizes whole OS.
+     size of docker images much smaller.
+     docker run and start much faster
+     VM of any OS can run on other OS.
+     linux based image might not run on windows. docker toolbox to solve this image. it abstracts away the kernel to make sure that hosts can run different docker images.
+
+container is running environment for image.
+
+sudo docker images : will show the imaoges installed her
+sudo docker pull image_name : will pull the image from the docker hub.
+sudo docker run image_name : will run the image called image_name.
+sudo docker run -d redis : run in background
+sudo docker stop docker_id : will stop the container.
+sudo docker ps -a : will show all the conntainers which are running or not running.
+sudo docker start docker_id : will start the docker.
+sudo docker run redis 4.0 as well as 4.1 : two different versions of image run differently.
+
+multiple contianes on same host.
+
+docker run -p6000:6379 redis
+laptop(host) 6000 port is binded to container 6379 port.
+docker run -p6000:6379 redis:4.0          : will give error saying that port is allocated,
+
+docker logs docker_id/docker_name : give history of the contaainer.
+docker run -d -p6001:6379 --name redis-older redis:4.0 : name of the container will be redis-older
+
+
+
+
+     
+
+
+
 
 
 
