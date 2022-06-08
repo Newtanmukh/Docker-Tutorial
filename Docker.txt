@@ -145,7 +145,12 @@ RUN apk add -- update redis
 CMD["redis-server"]
 
 
+docker build .
+docker run docker_id
 
+
+
+Docker is not a container. Actually Docker is company that offers containerization service. And container is isolated environment  that stores all your setup files(related to your product) and can give it to any of your client for  testing/deployment purpose in the form of docker image.
 
 
 
