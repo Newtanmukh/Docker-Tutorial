@@ -332,6 +332,13 @@ Change these things inside the Dockerfile as well. like add, node:alpine.
 
 
 
+docker logs docker_id : will show you the status, like whether running or nor, etc.
+
+docker logs -f docker_id : will follow the docker_id.
+
+
+
+
 
 
 

@@ -1,0 +1,32 @@
+Open source container orchestration tool. Originally developed by google.
+Kubernets helps you manage containerized applications in different environments, physical virtual as well as cloud.
+
+high avaibility of no downtime(always accisable by user),scalibility of high performance,disaster ecovery(data is so).
+
+
+
+Kubernets architecture,
+one master node, many worker nodes. each worker node has qublet running on it.
+each qublet is a process that allows the cluster to talk/comminucate to each other, and execute some tasks on the nodes.
+each worker node has docker containers of different applications running on it.
+depending on the distribution, you will have different number of docker applications running on each different worker node.
+
+
+Master node runs the various kubernets processes that ae necessary to run and manage cluster properly.
+one of such is API server, which is entrypoint to kubernets cluster.
+
+UI,API and CLI talks to the master node.
+
+virtual network controls everything here. they manage the way the master and worker nodes talk to each other. one powerful machine 
+they have the most nodes.
+
+
+we may have two masters, so as to ensure that cluster continues to master.
+
+
+
+
+
+
+
+
