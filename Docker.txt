@@ -302,6 +302,40 @@ RUN npm install
 CMD node index.js
 
 
+DOCKERIGNORE 
+
+create a file called .dockerignore
+inside it, write
+
+node_modules          =>     will ignore thi folder and all contents inside it
+Dockerfile            =>     will ignore this as well while making the image
+.git		      =>     will ignore the git as well. we DON'T want that.
+
+
+
+
+
+CACHING AND LAYERS : 
+the instructions inside the dockerfile create an image, each of the instruction create a layer.
+see this for later.
+
+#event api,build,test programs as well.
+#start implementing the protobuf.
+
+
+NOTE : we can easily reduce the file size of the image using alpine.
+
+
+docker pull node:lts-alpine  =>  will pull the alpine node version, which takes lesser space.
+Change these things inside the Dockerfile as well. like add, node:alpine.
+
+
+
+
+
+
+
+
 
 
 
