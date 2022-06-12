@@ -1,7 +1,7 @@
 Open source container orchestration tool. Originally developed by google.
 Kubernets helps you manage containerized applications in different environments, physical virtual as well as cloud.
 
-high avaibility of no downtime(always accisable by user),scalibility of high performance,disaster ecovery(data is so).
+high avaibility of no downtime(always accisable by user),scalability of high performance,disaster ecovery(data is so).
 
 
 
@@ -18,8 +18,8 @@ one of such is API server, which is entrypoint to kubernets cluster.
 UI,API and CLI talks to the master node.
 
 virtual network controls everything here. they manage the way the master and worker nodes talk to each other. one powerful machine 
-they have the most nodes.
-
+they have the most nodes. virtual node turns the nodes inside the cluster into one powerful machine.
+worker nodes have more resources/power,since they have to run applications inside the worker node.
 
 we may have two masters, so as to ensure that cluster continues to master.
 
