@@ -24,6 +24,252 @@ worker nodes have more resources/power,since they have to run applications insid
 we may have two masters, so as to ensure that cluster continues to master.
 
 
+		WORKER NODE :
+Pod is the smallest unit of kubernets. it creates llayer over the top of cintainer.
+they are the abstraction over container. we only interact with the kubernets layeer.
+it creates layer over the container.
+pod creates one or more containers inside it. infact we can run multiple containers inside each pod.(like docker containers.)
+another pod have a database container which in turn will have an IP address,which can communicate with other pods.
+pod may use its own database. you can run multiple containers inside one pod.
+each pod/DB has its own IP address
+pods can die very easily. new one will get created. will be assigned new IP address. and because of that, we may have to adjust everytime the pod restarts.
+becuase of that, another component called service is used.
+
+
+		SERVICE :
+service is permanent IP Address.
+even if pod dies, its service and IP address will stay.
+
+
+
+		EXTERNAL SERVICE:
+open communication from external sources.(we want it to be accessible through a browser)
+
+		INTERNAL SERVICE:
+type of service we specify,when creating one.
+
+		INGRESS:
+An API object that manages external access to the services in a cluster,
+typically HTTP.
+request first goes to ingress,then to service.
+
+
+
+		CONFIGMAP:
+external configuration to your application.(like, if in the case of the application we had stored the URL of the mongoDB Database. now if that changes then many things will have to be done)
+incase we have to change something, we just will have to change the stuff in the configmap.
+the pod connects to the COnfigMap using the pod.
+
+		SECRET:
+just like configmap,but used to store credentials in base64 format.
+we can simply connect it to the data.
+used to store the environment variables as well.
+
+		VOLUME :
+For data storage,
+if DB pod get restarted,it would be lost.
+it attaches a physical hard drive to your pod either on local machine or on the remote pcluster,which might not be part opf the cluster.
+external hard drive plugin into the K8s cluster,also k8s does not manage the data. it is YOUR responsibility.
+it also has another clone as well, like where all of these are present.
+defines blueprint of the pods.
+in reality we will create deployments. another abstarction on top of pods.
+we have two replicas of a node,which will also be connected to the service.
+service is also a load balancer. will catch the request and will forward it whichever pod which is free.
+
+
+*StatefulSet is used exclusively for Databases.
+
+
+
+MINIKUBE :
+setting up the exact cluster will be very difficult.
+master and worker processes run on this one node minikube.
+they have a separate docker container runtime pre-installed.
+test something on local machine.
+needs virtualization. need a hypervisor.
+used for testing processes.
+minikube creates a virtual box, 
+and a one node cluster (in which both the master and worker processes are running).
+docker also pre installed here to run docker processes.
+used for testing pruposes.
+
+
+
+KUBECTL:
+we need a way to make the pods and the other components on the node.
+we need a way to interact with the clusters.
+Kubectl is a command line tool used to run commands against Kubernetes clusters.
+It does this by authenticating with the Master Node of your cluster and making API calls.
+one of the master processes called API Server is the main entry point into the kubernets cluster.
+with kubectl, it provides a command line like interface which is the most powerful out of all. there are other options like UI as well but kubectl is the most used.
+
+
+if we want to do anything,like talk to something in the cluster or something like that,
+we first will have to talk via the API server.
+
+kubectl is used to interact with any type of cluster, be it minikube cluster or the cloud cluster.
+
+
+
+MINIKUBE COMMANDS :
+
+minikube start --vm-driver=virtualbox/hyperkit : start the minikube and tell that to starrt in Virtuablbox of your choicd.
+kubectl get node : will give you status of the nodes
+minikube status:status off pods
+kubectl version : client and server version of kubernets
+
+NOTE : minikube only for starting and deleting. everything else(configuration etc.) will be done using kubectl.
+
+kubectl get nodes.
+kubectl get pod : get details of the pods.
+kubectl get services : 
+kubectl create -help : will show u list of commands.
+ 
+
+we dont directly create pods. there is a layer of abstraction over which we create the pods,called deployment.
+
+kubectl create deployment NAME_of_DEPLOEMENT --image=nginx  :  create a deployment
+kubectl get deployment : will show u the running deployment.
+kibectl get pod : show us status of all the pods running.
+
+kubectl create deployment NAME_of_DEPLOEMENT --image=mongo  :  create a deployment
+kubectl logs pod_id :will show the status. if not running, then it will say that like the container
+		     "mongo" in pod pod_id is waiting to start.
+
+
+kubectl describe pod pod_id : will give more details.
+
+
+kubectl exec -it pod_name -- bin/bash : will get u inside the mongodb container.
+
+kubectl delete deployment deploy_name : delete the deployment whose deploy_name.
+
+kubectl apply -f nginx-deployment.yaml : config file , may contain some instructions. we can both create and update some deployment.
+
+
+
+
+
+
+############################################################################################################################
+
+Kubernetes takes care of :
+
+automatic deployment of contarized appln across servers.
+distribution of load across servers
+auto scaling of deployed applications
+montion and health check of the containers.
+replace failed containers, and all of this without our help.
+
+
+a pod is the smallest unit in the kubernets.
+there can be multiple container, as well as shared volumes and and shared IP address.
+all containers inside the pod share the volume and the IP address. we can have multiple containers inside each pod , i f incase we need to tighten it properly.
+each pod must be located on only one server. it is not possible to spread the containers from one pod
+across different servers in the cluster. one pod one server.
+
+each k8s cluster consist of nodes. they can be anywhere/data centers in the world.
+node is actually server. inside each node there can be pods,inside which lies the containers.
+nodes can be deployed in various part over the world.
+one node inside each cluster is called master node,it manages other nodes.
+job of the master node is to distibute work across different worker nodes.
+
+SERVICES INSIDE EACH NODE :
+container runtime : runs containers inside each node.
+kubelet : communicates with API server on the master node. API server main job is communciation with diff nodes in the world.
+kube proxy : netowkr related things inside each node as wel as between node.
+scheduler in master node: distribution of load between different children nodes in the cluster.
+kube controll manager in the mater node : controls everuthhing in the ku8s cluster. what happends on each node on the cluster.
+cloud controller manager : like connection between diff nodes, etc.
+etcd in master node  : all logs related to operation of entire k8s cluster.logs are stored there as key value pairs.
+
+using API server, you can manager an entire k8s cluster. it is done using kubectl. we can even manage remote k8s cluster
+
+
+minikube status : status of cluster.
+minikube start --driver=hyperv/hyperdriver name. can be virtual box as well.: start the cluster.
+minikube stus : host,kubelet running etc.
+minikube ip : which ip is running our kubernetes node.
+ssh docker@minkkube ip
+
+DOcker is default runtime container for kubernetes.
+kubectl cluster-info : to see the cluster info.
+
+kubectl get nodes : minikube creates single node. so it will show all the nodes available inside the default namespace.
+kubectl get pods : list of available pods.
+kubectl get namespaces : all available namespaces. namespaces are used to group different resources and configuration services.
+kubectl get pods --namespace=kube-system : will show the list of available pods to this particular namespace.
+kubectl run SOME_NAME --image=nginx : will pull the nginx image and will create a pod/running container inside the kubernetes cluster. its name will be SOME_NAME.
+kubectl describe pod SOME_NAME : all details related to this pod.
+		will give out various details like whcih namespace it is from,
+		which node it is running on / IP address of the node as well,
+		start time,
+		status,
+		IP assigned to this node, etc.
+		also, we can find out which containers we have created inside of this pod, what images we used for this container, ID of image.
+
+K8S automatically distributes the pods inside of the cluster.
+
+docker ps | grep nginx : show all nginx processes.
+
+docker exec -it container_id sh : will let u go inside the container. the container_id can be obtained from the above docker ps command
+
+hostname / hostname -i : first will give the hostname,second will give the IP.
+let hostname -i = server_id.
+
+#lets try to connect to web server which is running inside of this container.
+curl server_id : will connect to the server inside the container.
+
+kubectl get pods -o wide : will give the details of the container properly,including the IP address.
+#NOTE : All this ip address is inside the node and is internal ip address. we cant access it from outide.
+
+
+kubectl delete pod POD_NAME : will delete the pod with POD_NAME.
+
+#ALIAS for Kubectl
+alias k="kubectl"
+
+
+kubectl create deployment DEP_NAME --image=nginx
+kubectl get deployments : will create this deployment. further, will ALSO automatically create a pod as well.
+			  you can type k get pods to get the details.
+
+kubectl describe deployment deployment_id : describe the deployment
+selectors are used to connect pods to deployment.
+in replicas, you will get to see the pods which are assigned.
+
+kubectl scale deployment DEPLOYMENT_ID --replicas=5 : will create 5 pods inside this deployment.
+# we just have a single node here, so all pods will be assigned to this single node only.
+
+# TO GET INSIDE THE NODE :
+1)type minikube ip to get the ip address of the node.
+2)ssh docker@ip to go inside this node. they will ask for password as well for authencitcation.
+3) then just type curl ip_pod.   u can easily see the pod details using kubectl get pods -o wide
+
+
+
+
+#SERVICES 
+if you wish to connect to specific deployments using specific addresses, you will need service.
+
+*what if we wat to access a deployment from an outside port ?
+EXPOSE DEPLOYMENT USING EXTERNAL DEPLOYMENT
+kubectl expose deployment DEP_NAME --port=8080 --target-port=80
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
