@@ -1,0 +1,144 @@
+sudo systemctl status docker : will give u the status of the docker.
+			       you can check the Active : thing to see whether it is active or inactive
+
+sudo systemctl enable --now docker : start and enable the docker.
+
+				if it doesnt start, then reboot your OS.
+
+sudo docker run hello-world : 
+
+sudo docker images : will list you the number of images we have here.
+
+sudo docker version. : docker client and docker server. docker is running in a virutal machine,which is linux.
+
+sudo docker run hello-world : will pull this image from internet.
+
+
+
+
+
+
+
+
+
+
+DOCKER :
+
+docker is a tool for running applications in an isolated environment.
+very similar to VM, faster,doesnt require whole OS and memory.
+app run in the same environment.
+standard for software deployment.
+
+
+CONTAINER :
+
+a container doesnt require the whole OS. 
+multiple containers can run on the same machine and can share the OS kernel with other containers.
+ each running as isolated processes.
+ 
+ 
+ VIRTUAL MACHINES :
+ 
+ VMs are an abstraction of physical hardware turning one server into many servers.
+ hypervisor in VM turn one server into many servers.
+ The hypervisor allows many VMs to run on a single machine.
+ each VM includes a full copy of the OS, the application, the necessary binaries and the libraries.taking up tens of GB. 
+ VMs are slow to boot.
+ 
+ 
+ 
+ 
+ 
+ Benefits of using docker :
+ * Run container in seconds instead of minutes
+ * less resources less disk space.
+ * uses less memory
+ * does not need full OS
+ * Deployment
+ * Testing.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ IMAGE :
+ image is a template for creating an environment of your choice.
+ an image has everything you need to run your apps.
+ OS,software as well as app code.
+ 
+ 
+ CONTAINER :
+ it is running instance of an image.
+ 
+
+
+
+
+docker images : will show u the list of images we have downloaded.
+
+
+
+DOCKER HUB is the place from where you can download docker images.
+
+
+	1) docker images : will show u the list of images we have on our pc.
+	2) docker ps : will list all running docker containers.
+	3) docker ps -a : will show the list of both, the container which are running as  well as the ones which have stopped running. 
+	4) docker container ls : will show all the currently running containers.
+	5) docker container ls -a : similar to docker ps -a.
+	6) docker run -d nginx:latest    :   run container in background mode and print the running container id.
+	7) docker stop container_id : will stop the container.
+	8) docker run -d -p 8080:80 nginx:latest     :      connects the localhost port 8080 to the port 80 of the container.     ### the thing is that from the host, we should be able to give a 		request to  the container which is running on port 80.
+	9) docker run -d -p 8080:80 -p 9000:80 nginx:latest    :   from both te ports 8080 and 9000 we can access this running contianer. now we know how to map ports from hosts to containers.
+	10) docker start container_id / container_name : will restart the stopped container once again.
+	11) docker CMD --help    :   will list the available options.   e.g = docker ps --help.
+	12) docker rm container_name / container_id    :    will delete the container permanently. you will never get to see it back/restart it ever again.
+	13) docker rm $(docker ps -aq)    :    will delete all the containers (this will only work if no container is running.)
+	14) docker rm $(docker ps -q)     : will only delete the running containers.
+	15) docker rm -f $(docker ps -aq)   : will remove all containers forcefully.
+	16) docker run --name test -p 8080:80 -p 9000:80 nginx:latest       :       name of this container is test, and it will run on two ports.
+	17) docker rm -f container_name/container_id     :     will forcefully delete the container, even if it is running.
+	18) docker run --name website -v $(pwd)/website:/usr/share/nginx/html:ro -d -p 8080:80 nginx:latest              :              share static files from host to container.(remove ro to allow read and write mode both.)
+	19) docker exec -it container_name/container_id bash      :     go inside the container in bash mode.    after that, go to cd /usr/share/nginx/html.
+	20) docker run --name test --volumes-from website -d -p 8081:80 nginx:latest             :            share VOLUMES Between containers.
+	21) docker images -a -q  :  will show only the list of the docker images ID.
+	22) docker rmi image_id : will delete the particular image ID. 
+	23) docker rmi $(docker images -a -q)    : will delete all the images.
+	24) docker ps --format=$FORMAT
+	25) docker ps --format=$FORMAT
+	26) 	example of dockerfile : 
+	
+		FROM node:latest
+		WORKDIR /app               
+		ADD . .
+		RUN npm install
+		CMD node index.js
+	27)
+
+VOLUMES :
+docker volumes allow us to share data between host and containers as well as between containers.
+
+
+DOCKERFILE :                         //NOTE: we never build an image from scracth. we always use an existing image and we do the configuration on top of it.
+	FROM : this will be used to specify the base image name.
+	
+
+
+
+
+
+
+
+container is running,it will expose a port (generally it is 80 . )
+
+
+
+
+
+
+
+
+
+	
