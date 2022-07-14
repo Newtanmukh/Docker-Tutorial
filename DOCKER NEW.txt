@@ -193,13 +193,26 @@ container is running,it will expose a port (generally it is 80 . )
 	after u exec inside one of the running container, u can easily ping the other contianer running in the same network using : ping ip, where ip is the ip address of the other container.
 	(NOTE : before u can ping, do type apt-get update , as well as , apt-get install iputils-ping)
 	
-	32) docker create network network_name     :    will create a new network whose name is 'network_name'. (NOTE : u can check it using the command, docker network ls.)
+	32) docker network create host_2 --driver=bridge/host     :    will create a new network whose name is 'network_name'. if the driver is not specified then by default it will be bridged type. (NOTE : u can check it using the command, docker network ls.)
 	
 	33) docker run -dt --network network_name ubuntu bash     :    will create this continer of ubuntu, under the network of 'network_name' .
 	
 	
 	
 	
+								HOST NETWORK 
+								
+	it replicates the network stack of the host.
+	the IP address of the host VM as well as the contianer is same, except that to access the container, u will have to do ip:port.
+	advantage is that we are optimising performance. disadvantage is that anyone who has got access to the host VM will have access to this container as well.
+	
+	34 )  docker run -dt --network host --name my_ubuntu ubuntu:latest
+	
+	35)  docker network ls -f driver=bridge   :    will only list the bridge networks.
+	
+	36)  docker network ls -f driver=bridge -f scope=local     :    will give u list of all the networks which os of bride type and whose scope is local.
+	
+	37)  
 	
 
 
