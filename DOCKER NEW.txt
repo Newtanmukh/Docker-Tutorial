@@ -137,7 +137,70 @@ container is running,it will expose a port (generally it is 80 . )
 
 
 
-
+						DOCKER NETWORKING  :
+								
+								
+	docker networking allows a container to connect to as many networks as he/she likes.
+	docker networks are used to provide complete isolation for docke containers.
+	
+	docker networking is a pluggable type of subsystem.
+	lots of drivers which can be used to setup containers among the network host.	
+	execute the command docker info, and under the Plugins network, you will get to see the list of plugins supported.
+	
+	three networks get automatically created when we create configure and install docker on the virtual machine.
+	Type the command : docker network ls to see the list of networks available,
+	
+	28) docker network ls : will show u the list of network here.
+	
+	the three networks are:
+	bridge
+	host
+	none
+	
+	BRIDGE : is the default network driver which is chosen.
+	NONE : containers entire networking is disabled. it cant communicate to any container on that host.
+	HOST : when the container completely replicates the hosts network stack and starts behaving as if it is the host itself. whatever will be the IP address of the host, will be the IP address of the container in case of host networking.
+	
+	inter bride communication is not possible in regular docker.
+	bridge network created by default.this bride is created on the linux level. it is named as docker0.
+	we can create multiple containers on this bridge.
+	when the default bridge got created, it had a subnet associated with it and gateway IP address.
+	from that subnet, the container on that bridge will get an IP Address.
+	e.g. : if subnet is 172.17.0.0  , gateway will take 172.17.0.1, next containers will take 172.17.0.2 , ...3 etc etc.
+	docker daemon has an ethernet interface marked as eth0.  
+	whenever a packet comes to the interface,it will fall on the bridge and from there it will go to the container.
+	containers in same bridge can communicate to each other.
+	
+	
+	eth0 is the default interface of the docker host machine.(or docker interface is only having one interface internet card.)
+	docker0 is the bridge by default which is created.
+	
+	
+	we can create our custom bridges as well. and on that we can create our own containers.
+	in one docker host all containers should have a unique name.
+	communication across networks is not there.
+	
+	bridge-utils : using this package we can use some bridge related commabds.
+	
+	29) brctl show              :            will show all the bridges in this docker host.
+	30) docker exec -it container_id bash   :   will take u inside the container in execution mode.
+	
+	31) docker network inspect network_name  :   if u want to see more details associated with this network. how many containers are running inside it,etc.
+	
+	two containers are running inside the network, and they have two different ethernet interfaces and IP address  associated with the network.
+	
+	
+	after u exec inside one of the running container, u can easily ping the other contianer running in the same network using : ping ip, where ip is the ip address of the other container.
+	(NOTE : before u can ping, do type apt-get update , as well as , apt-get install iputils-ping)
+	
+	32) docker create network network_name     :    will create a new network whose name is 'network_name'. (NOTE : u can check it using the command, docker network ls.)
+	
+	33) docker run -dt --network network_name ubuntu bash     :    will create this continer of ubuntu, under the network of 'network_name' .
+	
+	
+	
+	
+	
 
 
 
